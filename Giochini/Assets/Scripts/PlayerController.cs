@@ -38,17 +38,26 @@ public class PlayerController : MonoBehaviour {
     private void ManageInteraction() {
         if (Input.GetButtonDown("Grab" + playerIndex)) {
 
-            int layerMask = LayerMask.GetMask("Offer");
+            Offer newOffer = null;
             RaycastHit hit = new RaycastHit();
             
-            if (Physics.SphereCast(new Ray(transform.position, transform.forward), 0.5f, out hit, 1f, layerMask)) {
+            if (Physics.SphereCast(new Ray(transform.position, transform.forward), 0.5f, out hit, 1f, LayerMask.GetMask("Offer"))) {
                 //print(hit.collider.gameObject);
-                offer = hit.collider.GetComponent<Offer>();
-                offer.transform.parent = transform;
-                offer.transform.localPosition= offerTransform.localPosition;
-                offer.transform.localRotation = offerTransform.localRotation;
+                newOffer = hit.collider.GetComponent<Offer>();
             }
 
+            if (offer) {
+                offer.Drop();
+            }
+
+            if (newOffer) {
+                newOffer.transform.parent = transform;
+                newOffer.transform.localPosition = offerTransform.localPosition;
+                newOffer.transform.localRotation = offerTransform.localRotation;
+                newOffer.Grab();
+            }
+
+            offer = newOffer;
         }
     }
 }
