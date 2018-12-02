@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour {
     public float speed = 3;
     public float bloodSacrificeMultiplier = 0.75f;
     public Transform offerTransform;
-    public BoxCollider grabColl;
 
     private Rigidbody rigidBody;
     private Offer offer;
@@ -72,7 +71,7 @@ public class PlayerController : MonoBehaviour {
                     temple.DoBloodSacrifice();
                     speed *= bloodSacrificeMultiplier;
 
-                    print("BLOOD!");
+                    //print("BLOOD!");
                 }
             }
         }

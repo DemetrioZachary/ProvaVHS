@@ -98,7 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   code: C
   witheringTime: 10
-  icon: {fileID: 21300000, guid: 9d585d2c8f6b2bc4a94d16b65a4fc543, type: 3}
+  iconOn: {fileID: 21300000, guid: e759fee261aafc84a88f2cdb6399a8d0, type: 3}
+  iconOff: {fileID: 21300000, guid: 9858467b14e671f48a6e7bcd7d40788f, type: 3}
+  bloodPS: {fileID: 198587935686218330, guid: 50ce2ffbfab70c04d8ac405975098ce3, type: 2}
   isGrabbed: 0
 --- !u!135 &135046004883707312
 SphereCollider:

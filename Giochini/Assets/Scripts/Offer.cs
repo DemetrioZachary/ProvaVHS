@@ -7,7 +7,8 @@ public class Offer : MonoBehaviour {
 
     public string code;
     public float witheringTime = 6f;
-    public Sprite icon;
+    public Sprite iconOn, iconOff;
+    public ParticleSystem bloodPS;
 
     private float startY;
     private Transform offersContainer;
@@ -49,7 +50,7 @@ public class Offer : MonoBehaviour {
     }
 
     public void DestroyOffer() {
-        // TEMP
+        Instantiate(bloodPS, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }
