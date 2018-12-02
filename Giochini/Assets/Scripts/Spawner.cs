@@ -5,7 +5,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 
     public float spawnDelay = 10f;
-    public Offer offerPrefab;
+    [Space]
+    public Offer offerprefab;
     public Transform spawnTransform;
 
     private Offer offer;
@@ -20,16 +21,17 @@ public class Spawner : MonoBehaviour {
             yield return new WaitForEndOfFrame();
             time += Time.deltaTime;
         }
-
-        offer = Instantiate(offerPrefab, spawnTransform) as Offer;
+        offer = Instantiate(offerprefab, spawnTransform) as Offer;
         StartCoroutine(CheckIfGrabbed());
     }
 
     private IEnumerator CheckIfGrabbed() {
-        while(!offer.isPicked){
-            yield return null;
+        while(!offer.isGrabbed){
+            yield return new WaitForEndOfFrame();
         }
 
+        offer.StartWithering();
+        offer = null;
         StartCoroutine(SpawnOffer());
     }
 }

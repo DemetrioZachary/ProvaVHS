@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class Temple : MonoBehaviour {
 
-    public int templeIndex = 1;
-    public float happiness = 100f;
+    public const int MAX_HAPPINESS = 100;
 
+    public int templeIndex = 1;
+    private float happiness = MAX_HAPPINESS;
+
+    [Space]
+    public float happySpeed;
+    public float happyAcceleration;
+
+    [Space]
     public float sacrificeReward = 40f;
     public float mistakeInjury = 20f;
 
     [Space]
-    public DataContainer dataContainer; 
     public SpriteRenderer[] requestsSR;
+    public Light divineLight;
 
-    private OfferType[] requests = new OfferType[3];
+    private string[] requests = new string[3];
     private int[] validation = { 0, 0, 0 };
 
     private BoxCollider coll;
@@ -33,14 +40,16 @@ public class Temple : MonoBehaviour {
             CancelInvoke();
             Invoke("CheckOffers", 0.1f);
         }
+
+        AddHappiness(-Time.deltaTime * (happySpeed + 0.5f * happyAcceleration * Time.deltaTime));
+        happySpeed += happyAcceleration * Time.deltaTime;
     }
 
     private void GenerateRequests() {
-        int max = System.Enum.GetValues(typeof(OfferType)).Length;
         for(int i = 0; i < 3; i++) {
-            int r = Random.Range(0, max);
-            requests[i] = (OfferType)r;
-            requestsSR[i].sprite = dataContainer.requestSprites[r];
+            int rand = Random.Range(0, DataContainer.instance.offers.Length);
+            requests[i] = DataContainer.instance.offers[rand].code;
+            requestsSR[i].sprite = DataContainer.instance.offers[rand].icon;
         }
         //print(requests[0].ToString() + " " + requests[1].ToString() + " " + requests[2].ToString());
     }
@@ -49,14 +58,14 @@ public class Temple : MonoBehaviour {
         Collider[] overlapping = Physics.OverlapBox(transform.position + coll.center, coll.size, Quaternion.identity, LayerMask.GetMask("Offer"));
 
         if (overlapping.Length > 0) {
-            foreach (Collider c in overlapping) {
+            foreach (Collider otherColl in overlapping) {
 
                 bool match = false;
-                Offer offer = c.GetComponent<Offer>();
+                Offer offer = otherColl.GetComponent<Offer>();
 
                 for (int i = 0; i < 3; i++) {
                     if (validation[i] == 1) { continue; }
-                    if (offer.type == requests[i]) {
+                    if (offer.code == requests[i]) {
                         validation[i] = 1;
                         match = true;
                         break;
@@ -65,7 +74,7 @@ public class Temple : MonoBehaviour {
                 offer.DestroyOffer();
 
                 if (!match) {
-                    AddHappiness(mistakeInjury);
+                    AddHappiness(-mistakeInjury);
                     //print("SO BAD!");
                 }
             }
@@ -79,5 +88,14 @@ public class Temple : MonoBehaviour {
 
     private void AddHappiness(float value) {
         happiness = Mathf.Clamp(happiness + value, 0, 100);
+        divineLight.intensity = 1f - happiness / 100f;
+        UIManager.instance.SetHappyBar(templeIndex, happiness);
+        if (happiness <= 0) {
+            GameManager.instance.EndGame(templeIndex);
+        }
+    }
+
+    public void DoBloodSacrifice() {
+        happiness = MAX_HAPPINESS;
     }
 }

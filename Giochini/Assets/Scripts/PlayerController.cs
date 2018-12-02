@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public int playerIndex = 1;
     public float speed = 3;
+    public float bloodSacrificeMultiplier = 0.75f;
     public Transform offerTransform;
 
     private Rigidbody rigidBody;
@@ -15,11 +16,11 @@ public class PlayerController : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    private void Update () {
+    private void Update() {
         ManageMovement();
         ManageInteraction();
-
-        Debug.DrawLine(transform.position, transform.position + 2*transform.forward, Color.blue);
+        ManageSacrifice();
+        //Debug.DrawLine(transform.position, transform.position + 2*transform.forward, Color.blue);
     }
 
     private void ManageMovement() {
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour {
             rigidBody.velocity = vec.normalized * Mathf.Clamp01(vec.magnitude) * speed;
 
 
-            transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, vec,Vector3.up), 0);
+            transform.rotation = Quaternion.Euler(0, Vector3.SignedAngle(Vector3.forward, vec, Vector3.up), 0);
         }
     }
 
@@ -40,8 +41,8 @@ public class PlayerController : MonoBehaviour {
 
             Offer newOffer = null;
             RaycastHit hit = new RaycastHit();
-            
-            if (Physics.SphereCast(new Ray(transform.position, transform.forward), 0.5f, out hit, 1f, LayerMask.GetMask("Offer"))) {
+
+            if (Physics.SphereCast(new Ray(transform.position, transform.forward), 0.6f, out hit, 1f, LayerMask.GetMask("Offer"))) {
                 //print(hit.collider.gameObject);
                 newOffer = hit.collider.GetComponent<Offer>();
             }
@@ -58,6 +59,21 @@ public class PlayerController : MonoBehaviour {
             }
 
             offer = newOffer;
+        }
+    }
+
+    private void ManageSacrifice() {
+        if (Input.GetButtonDown("Sacrifice" + playerIndex)) {
+            Collider[] overlapping = Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, LayerMask.GetMask("Temple"));
+            if (overlapping.Length > 0) {
+                Temple temple = overlapping[0].GetComponent<Temple>();
+                if (temple.templeIndex == playerIndex) {
+                    temple.DoBloodSacrifice();
+                    speed *= bloodSacrificeMultiplier;
+
+                    print("BLOOD!");
+                }
+            }
         }
     }
 }

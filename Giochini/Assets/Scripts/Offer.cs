@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum OfferType {A,B,C }
 
 public class Offer : MonoBehaviour {
 
-    public OfferType type;
+    public string code;
+    public float witheringTime = 6f;
+    public Sprite icon;
 
     private float startY;
     private Transform offersContainer;
     private Collider coll;
 
     [HideInInspector]
-    public bool isPicked = false;
+    public bool isGrabbed = false;
 
     private void Start() {
         startY = transform.position.y;
@@ -21,16 +22,30 @@ public class Offer : MonoBehaviour {
         offersContainer = GameObject.Find("OFFERS").transform;
     }
 
+    public void StartWithering() {
+        StartCoroutine(Wither());
+    }
+
+    private IEnumerator Wither() {
+        while (witheringTime > 0) {
+            yield return new WaitForEndOfFrame();
+            if (!isGrabbed) {
+                witheringTime -= Time.deltaTime;
+            }
+        }
+        DestroyOffer();
+    }
+
     public void Grab() {
         coll.enabled = false;
-        isPicked = true;
+        isGrabbed = true;
     }
 
     public void Drop() {
         transform.parent = offersContainer;
         transform.position = new Vector3(transform.position.x, startY, transform.position.z);
         coll.enabled = true;
-        isPicked = false;
+        isGrabbed = false;
     }
 
     public void DestroyOffer() {

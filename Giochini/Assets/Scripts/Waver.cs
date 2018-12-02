@@ -15,7 +15,7 @@ public class Waver : MonoBehaviour {
     }
 
     void Update() {
-        transform.position = new Vector3(transform.position.x, startY + Mathf.Sin(alpha) / widthMultiplier, transform.position.z);
+        transform.position = new Vector3(transform.position.x, startY + Mathf.Sin(alpha) * widthMultiplier, transform.position.z);
         alpha += Time.deltaTime * waveSpeed;
     }
 }
