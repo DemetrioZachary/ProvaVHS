@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float speed = 3;
     public float bloodSacrificeMultiplier = 0.75f;
     public Transform offerTransform;
+    public BoxCollider grabColl;
 
     private Rigidbody rigidBody;
     private Offer offer;
@@ -42,11 +43,11 @@ public class PlayerController : MonoBehaviour {
             Offer newOffer = null;
             RaycastHit hit = new RaycastHit();
 
-            if (Physics.SphereCast(new Ray(transform.position, transform.forward), 0.6f, out hit, 1f, LayerMask.GetMask("Offer"))) {
+            if (Physics.Raycast(new Ray(transform.position+Vector3.up,transform.forward), out hit, 1.5f, LayerMask.GetMask("Offer"))) {
                 //print(hit.collider.gameObject);
                 newOffer = hit.collider.GetComponent<Offer>();
             }
-
+            
             if (offer) {
                 offer.Drop();
             }

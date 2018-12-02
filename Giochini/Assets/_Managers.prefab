@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offers:
   - {fileID: 114451747473510256, guid: 622c33c6ea9b19c4eae7026838748a8e, type: 2}
+  - {fileID: 114451747473510256, guid: 0b1e2bf31d1cb5f4bb25dcbe9b362590, type: 2}
   - {fileID: 114451747473510256, guid: 3c920b93b197fea4e93264cec0260b4e, type: 2}
   - {fileID: 114451747473510256, guid: a08f859d950742f4789b9af32fc90c22, type: 2}
 --- !u!114 &114946648013312044

@@ -10,8 +10,13 @@ public class Temple : MonoBehaviour {
     private float happiness = MAX_HAPPINESS;
 
     [Space]
-    public float happySpeed;
-    public float happyAcceleration;
+    public float ragePoint1 = 75f;
+    public float ragePoint2 = 50f;
+    public float ragePoint3 = 25f;
+
+    [Space]
+    public float happySpeed=0.1f;
+    public float happyAcceleration=0.01f;
 
     [Space]
     public float sacrificeReward = 40f;
@@ -46,16 +51,17 @@ public class Temple : MonoBehaviour {
     }
 
     private void GenerateRequests() {
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             int rand = Random.Range(0, DataContainer.instance.offers.Length);
             requests[i] = DataContainer.instance.offers[rand].code;
             requestsSR[i].sprite = DataContainer.instance.offers[rand].icon;
+            validation[i] = 0;
         }
         //print(requests[0].ToString() + " " + requests[1].ToString() + " " + requests[2].ToString());
     }
 
     private void CheckOffers() {
-        Collider[] overlapping = Physics.OverlapBox(transform.position + coll.center, coll.size, Quaternion.identity, LayerMask.GetMask("Offer"));
+        Collider[] overlapping = Physics.OverlapBox(transform.position + coll.center, coll.size / 2f, Quaternion.identity, LayerMask.GetMask("Offer"));
 
         if (overlapping.Length > 0) {
             foreach (Collider otherColl in overlapping) {
@@ -67,6 +73,7 @@ public class Temple : MonoBehaviour {
                     if (validation[i] == 1) { continue; }
                     if (offer.code == requests[i]) {
                         validation[i] = 1;
+                        requestsSR[i].sprite = null;
                         match = true;
                         break;
                     }
@@ -81,6 +88,7 @@ public class Temple : MonoBehaviour {
 
             if (validation[0] == 1 && validation[1] == 1 && validation[2] == 1) {
                 AddHappiness(sacrificeReward);
+                GenerateRequests();
                 //print("VERY GOOD!");
             }
         }
