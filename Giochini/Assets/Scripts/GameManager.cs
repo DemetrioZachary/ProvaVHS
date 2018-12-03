@@ -21,7 +21,4 @@ public class GameManager : MonoBehaviour {
     }
     // ----------------------------------------------------
 
-    public void EndGame(int loserIndex) {
-
-    }
 }

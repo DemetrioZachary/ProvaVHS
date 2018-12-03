@@ -98,7 +98,7 @@ public class Temple : MonoBehaviour {
         ChangeLight();
         UIManager.instance.SetHappyBar(templeIndex, happiness);
         if (happiness <= 0) {
-            GameManager.instance.EndGame(templeIndex);
+            UIManager.instance.EndGame(templeIndex);
         }
         calamityManager.ManageCalamity(templeIndex, happiness);
     }
