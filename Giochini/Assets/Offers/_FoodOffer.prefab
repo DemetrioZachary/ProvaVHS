@@ -38,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1920461817795944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 9c5018491c339ef4a8de5365ef439e95, type: 2}
+  - {fileID: 2100000, guid: 11dc9d21d4f027c4d9a43dc365a33ac5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -84,7 +84,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1920461817795944}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: 94f394293a1730443a29bbce6ac2c881, type: 3}
 --- !u!114 &114451747473510256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   code: B
-  witheringTime: 6
+  witheringTime: 4
   iconOn: {fileID: 21300000, guid: 2d74fae30170d024eb2d35cc705b1ef7, type: 3}
   iconOff: {fileID: 21300000, guid: 6a5a2a2012de20a4895ee91dcee1292f, type: 3}
   bloodPS: {fileID: 198587935686218330, guid: 50ce2ffbfab70c04d8ac405975098ce3, type: 2}

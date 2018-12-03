@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 2
-  speed: 5
+  speed: 6
   bloodSacrificeMultiplier: 0.75
   offerTransform: {fileID: 4416506045956484}
 --- !u!136 &136258492668743314

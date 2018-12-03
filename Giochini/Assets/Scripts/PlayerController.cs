@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody rigidBody;
     private Offer offer;
+    private bool bloodSacrificed = false;
 
     private void Start() {
         rigidBody = GetComponent<Rigidbody>();
@@ -63,13 +64,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void ManageSacrifice() {
-        if (Input.GetButtonDown("Sacrifice" + playerIndex)) {
+        if (Input.GetButtonDown("Sacrifice" + playerIndex) && !bloodSacrificed) {
             Collider[] overlapping = Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, LayerMask.GetMask("Temple"));
             if (overlapping.Length > 0) {
                 Temple temple = overlapping[0].GetComponent<Temple>();
                 if (temple.templeIndex == playerIndex) {
                     temple.DoBloodSacrifice();
                     speed *= bloodSacrificeMultiplier;
+                    bloodSacrificed = true;
+                    // TODO PARTICLE!!!
 
                     //print("BLOOD!");
                 }
