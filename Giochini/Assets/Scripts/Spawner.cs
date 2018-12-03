@@ -12,7 +12,13 @@ public class Spawner : MonoBehaviour {
     private Offer offer;
 
 	void Start () {
-        StartCoroutine(SpawnOffer());
+        if (Random.Range(0, 10) > 4) {
+            StartCoroutine(SpawnOffer());
+        }
+        else {
+            offer = Instantiate(offerprefab, spawnTransform) as Offer;
+            StartCoroutine(CheckIfGrabbed());
+        }
 	}
 
     private IEnumerator SpawnOffer() {
