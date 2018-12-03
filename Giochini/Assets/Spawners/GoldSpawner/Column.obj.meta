@@ -11,7 +11,12 @@ ModelImporter:
     2300000: polySurface9_fatt
     3300000: polySurface9_fatt
     4300000: polySurface9_fatt
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: polySurface9_fattMat
+    second: {fileID: 2100000, guid: d549210e806024c46bb5458deac2aa3b, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

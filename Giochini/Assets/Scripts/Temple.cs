@@ -20,6 +20,8 @@ public class Temple : MonoBehaviour {
     [Space]
     public SpriteRenderer[] requestsSR;
     public Light divineLight;
+    public float minLightIntensity = 1f;
+    public float maxLightIntensity = 10f;
 
     private string[] requests = new string[3];
     private int[] validation = { 0, 0, 0 };
@@ -92,13 +94,17 @@ public class Temple : MonoBehaviour {
     }
 
     private void AddHappiness(float value) {
-        happiness = Mathf.Clamp(happiness + value, 0, 100);
-        divineLight.intensity = 1f - happiness / 100f;
+        happiness = Mathf.Clamp(happiness + value, 0, MAX_HAPPINESS);
+        ChangeLight();
         UIManager.instance.SetHappyBar(templeIndex, happiness);
         if (happiness <= 0) {
             GameManager.instance.EndGame(templeIndex);
         }
         calamityManager.ManageCalamity(templeIndex, happiness);
+    }
+
+    private void ChangeLight() {
+        divineLight.intensity = maxLightIntensity - happiness / MAX_HAPPINESS * (maxLightIntensity - minLightIntensity);
     }
 
     public void DoBloodSacrifice() {

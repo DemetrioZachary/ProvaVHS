@@ -11,7 +11,12 @@ ModelImporter:
     2300000: pCube20_fatt
     3300000: pCube20_fatt
     4300000: pCube20_fatt
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pCube20_fattMat
+    second: {fileID: 2100000, guid: c2e3c9fea7abf504d807744452a36dd1, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
