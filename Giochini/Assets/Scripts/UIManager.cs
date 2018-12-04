@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour {
     public Image endGameBackground;
     public Sprite p1Win, p2Win, draw;
 
+    [Space]
+    public AudioSource winAudio;
+
     private bool paused = false;
     private bool endGame = false;
 
@@ -96,6 +99,8 @@ public class UIManager : MonoBehaviour {
         endGameMenu.SetActive(true);
         endGameMenu.GetComponentInChildren<Button>().Select();
         pauseMenu.SetActive(false);
+
+        winAudio.Play();
     }
 
     // MENU BUTTONS

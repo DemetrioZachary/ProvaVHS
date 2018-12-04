@@ -23,6 +23,9 @@ public class Temple : MonoBehaviour {
     public float minLightIntensity = 1f;
     public float maxLightIntensity = 10f;
 
+    [Space]
+    public AudioSource audioSource;
+
     private string[] requests = new string[3];
     private int[] validation = { 0, 0, 0 };
 
@@ -88,6 +91,7 @@ public class Temple : MonoBehaviour {
             if (validation[0] == 1 && validation[1] == 1 && validation[2] == 1) {
                 AddHappiness(sacrificeReward);
                 GenerateRequests();
+                audioSource.Play();
                 //print("VERY GOOD!");
             }
         }
