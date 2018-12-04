@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
     public float speed = 3;
     public float bloodSacrificeMultiplier = 0.75f;
     public Transform offerTransform;
+    public ParticleSystem blood;
 
     private Rigidbody rigidBody;
     private Offer offer;
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour {
             Offer newOffer = null;
             RaycastHit hit = new RaycastHit();
 
-            if (Physics.Raycast(new Ray(transform.position+Vector3.up,transform.forward), out hit, 1.5f, LayerMask.GetMask("Offer"))) {
+            if (Physics.Raycast(new Ray(transform.position + Vector3.up - transform.forward, transform.forward), out hit, 2f, LayerMask.GetMask("Offer"))) {
                 //print(hit.collider.gameObject);
                 newOffer = hit.collider.GetComponent<Offer>();
             }
@@ -72,7 +73,7 @@ public class PlayerController : MonoBehaviour {
                     temple.DoBloodSacrifice();
                     speed *= bloodSacrificeMultiplier;
                     bloodSacrificed = true;
-                    // TODO PARTICLE!!!
+                    blood.Play();
 
                     //print("BLOOD!");
                 }

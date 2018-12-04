@@ -69,14 +69,14 @@ public class UIManager : MonoBehaviour {
                 pauseMenu.SetActive(true);
                 Time.timeScale = 0;
                 pauseMenu.GetComponentInChildren<Button>().Select();
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                //Cursor.lockState = CursorLockMode.None;
+                //Cursor.visible = true;
             }
             else {
                 Time.timeScale = 1;
                 pauseMenu.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                //Cursor.lockState = CursorLockMode.Locked;
+                //Cursor.visible = false;
             }
         }
     }
@@ -84,8 +84,8 @@ public class UIManager : MonoBehaviour {
     public void EndGame(int playerIndex) {
         endGame = true;
         Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
 
         if (playerIndex == 1) {
             endGameBackground.sprite = p2Win;
@@ -94,6 +94,7 @@ public class UIManager : MonoBehaviour {
             endGameBackground.sprite = p1Win;
         }
         endGameMenu.SetActive(true);
+        endGameMenu.GetComponentInChildren<Button>().Select();
         pauseMenu.SetActive(false);
     }
 
@@ -101,8 +102,8 @@ public class UIManager : MonoBehaviour {
     public void Resume() {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     public void GotToMenu() {
