@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a73260207f4f54bad4231eaadb6fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  code: C
+  code: GLD
   witheringTime: 10
   iconOn: {fileID: 21300000, guid: e759fee261aafc84a88f2cdb6399a8d0, type: 3}
   iconOff: {fileID: 21300000, guid: 9858467b14e671f48a6e7bcd7d40788f, type: 3}

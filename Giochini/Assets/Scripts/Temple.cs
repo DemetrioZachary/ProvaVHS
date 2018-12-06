@@ -73,7 +73,7 @@ public class Temple : MonoBehaviour {
 
                 for (int i = 0; i < 3; i++) {
                     if (validation[i] == 1) { continue; }
-                    if (offer.code == requests[i]) {
+                    else if (offer.code == requests[i]) {
                         validation[i] = 1;
                         requestsSR[i].sprite = offer.iconOff;
                         match = true;

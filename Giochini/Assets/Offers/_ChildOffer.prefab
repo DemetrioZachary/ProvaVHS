@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a73260207f4f54bad4231eaadb6fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  code: CH
-  witheringTime: 7
+  code: CHL
+  witheringTime: 5
   iconOn: {fileID: 21300000, guid: 90e89e139cd2cab459d45bcea4e9263e, type: 3}
   iconOff: {fileID: 21300000, guid: 074b0953cdc1c484b991bd30d51e2389, type: 3}
   bloodPS: {fileID: 198587935686218330, guid: 50ce2ffbfab70c04d8ac405975098ce3, type: 2}
